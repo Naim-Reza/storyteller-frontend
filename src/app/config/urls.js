@@ -1,7 +1,8 @@
 const urls = {
   dashboard: "/dashboard",
-  posts: "/posts",
-  editPost: "/posts/:id",
+  stroies: "/stories",
+  addnewstory: "/newstory",
+  editStory: "/stories/:id",
   login: "/login",
   register: "/resgister",
 };
