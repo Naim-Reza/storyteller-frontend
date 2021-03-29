@@ -1,5 +1,11 @@
 import React from "react";
+import { BrowserRouter as Router } from "react-router-dom";
+import AuthRoutes from "./app/routes/AuthRoutes";
 
 export default function App() {
-  return <div>Hello</div>;
+  return (
+    <Router>
+      <AuthRoutes />
+    </Router>
+  );
 }
