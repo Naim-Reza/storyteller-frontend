@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router";
 import {
   Button,
   Card,
@@ -7,8 +8,10 @@ import {
   CardHeader,
   CardText,
 } from "reactstrap";
+import urls from "../config/urls";
 
 export default function StoryCard() {
+  const history = useHistory();
   return (
     <Card className="shadow">
       <CardHeader>
@@ -35,7 +38,12 @@ export default function StoryCard() {
         </CardText>
       </CardBody>
       <CardFooter>
-        <Button color="primary" className="text-uppercase mr-2" outline>
+        <Button
+          color="primary"
+          className="text-uppercase mr-2"
+          outline
+          onClick={() => history.push(urls.editStory)}
+        >
           Edit
         </Button>
         <Button color="danger" className="text-uppercase" outline>

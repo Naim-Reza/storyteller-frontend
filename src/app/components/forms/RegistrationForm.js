@@ -104,6 +104,7 @@ export default function RegistrationForm() {
                   <Input
                     id="email"
                     name="email"
+                    type="email"
                     placeholder="Email Address"
                     value={values.email}
                     onChange={handleChange}
@@ -119,6 +120,7 @@ export default function RegistrationForm() {
                   <Input
                     id="password"
                     name="password"
+                    type="password"
                     placeholder="Choose a Password"
                     value={values.password}
                     onChange={handleChange}
