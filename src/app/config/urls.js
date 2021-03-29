@@ -5,3 +5,5 @@ const urls = {
   login: "/login",
   register: "/resgister",
 };
+
+export default urls;
