@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import {
+  Alert,
   Button,
   Card,
   CardBody,
@@ -12,19 +13,50 @@ import {
   Label,
   Spinner,
 } from "reactstrap";
+import useAuth from "../../hooks/useAuth";
+import { updateStory } from "../../api/stories";
+import ServerErrorAlert from "../ServerErrorAlert";
+import { useParams } from "react-router";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required().min(3).max(100).label("Title"),
   description: Yup.string().required().min(10).max(1000).label("Story"),
 });
 
-export default function EditPostForm() {
+export default function EditPostForm({ data }) {
+  const [error, setError] = useState(undefined);
+  const [success, setSuccess] = useState(false);
+  const { setNewPost } = useAuth();
+  const { id } = useParams();
+
+  const closeErrorAlert = () => setError(undefined);
+  const closeSuccessAlert = () => setSuccess(false);
+
+  const handleUpdate = async (values) => {
+    const response = await updateStory(values, id);
+    if (!response.ok) return setError(response.data);
+    setSuccess(true);
+    setNewPost(response.data);
+  };
+
   return (
     <div>
+      {error && (
+        <ServerErrorAlert
+          isOpen={error ? true : false}
+          toggle={closeErrorAlert}
+          errorMsg={error}
+        />
+      )}
+      {success && (
+        <Alert isOpen={success} toggle={closeSuccessAlert}>
+          Story Updated Successfully.
+        </Alert>
+      )}
       <Formik
-        initialValues={{ title: "", description: "" }}
+        initialValues={{ title: data.title, description: data.description }}
         validationSchema={validationSchema}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={handleUpdate}
       >
         {({
           errors,

@@ -11,7 +11,7 @@ import {
 } from "../auth/authstorage";
 
 export default function useAuth() {
-  const { user, setUser } = useContext(AuthContext);
+  const { user, newPost, setUser, setNewPost } = useContext(AuthContext);
 
   const login = async (values) => {
     const response = await loginRequest(values);
@@ -51,5 +51,5 @@ export default function useAuth() {
     return response;
   };
 
-  return { user, login, logout, register };
+  return { user, newPost, setNewPost, login, logout, register };
 }

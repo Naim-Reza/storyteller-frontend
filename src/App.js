@@ -8,6 +8,7 @@ import UserRoutes from "./app/routes/UserRoutes";
 
 export default function App() {
   const [user, setUser] = useState();
+  const [newPost, setNewPost] = useState(undefined);
   const [isLoading, setIsLoading] = useState(false);
 
   const retriveUser = async () => {
@@ -23,7 +24,7 @@ export default function App() {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, setUser }}>
+    <AuthContext.Provider value={{ user, newPost, setUser, setNewPost }}>
       {isLoading && <Preloader />}
       <Router>{user ? <UserRoutes /> : <AuthRoutes />}</Router>
     </AuthContext.Provider>

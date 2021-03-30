@@ -6,6 +6,7 @@ import AddStoryScreen from "../screens/AddStoryScreen";
 import DashboardScreen from "../screens/DashboardScreen";
 import EditStoryScreen from "../screens/EditStoryScreen";
 import StoriesScreen from "../screens/StoriesScreen";
+import ViewStoryScreen from "../screens/ViewStoryScreen";
 
 export default function UserRoutes() {
   return (
@@ -23,6 +24,9 @@ export default function UserRoutes() {
         </Route>
         <Route path={urls.editStory} exact>
           <EditStoryScreen />
+        </Route>
+        <Route path={urls.viewStory} exact>
+          <ViewStoryScreen />
         </Route>
         <Route path="*">
           <Redirect to={urls.dashboard} />
