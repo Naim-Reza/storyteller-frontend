@@ -1,4 +1,5 @@
 const urls = {
+  root: "/",
   dashboard: "/dashboard",
   stroies: "/stories",
   addnewstory: "/newstory",

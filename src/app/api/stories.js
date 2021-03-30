@@ -1,9 +1,21 @@
 import Api from "./client";
 
 const rootEndPoint = "/stories";
+const recentStoryEndPoint = "/web/recent_stories";
+const webStoriesEndPoing = "/web/stories";
 
 const getUserStories = () =>
   Api.get(rootEndPoint)
+    .then((response) => response)
+    .catch((error) => error);
+
+const getWebStories = () =>
+  Api.get(webStoriesEndPoing)
+    .then((response) => response)
+    .catch((error) => error);
+
+const getRecentStories = () =>
+  Api.get(recentStoryEndPoint)
     .then((response) => response)
     .catch((error) => error);
 
@@ -27,4 +39,12 @@ const getStory = (id) =>
     .then((response) => response)
     .catch((error) => error);
 
-export { getUserStories, postStory, updateStory, deleteStory, getStory };
+export {
+  getUserStories,
+  postStory,
+  updateStory,
+  deleteStory,
+  getStory,
+  getRecentStories,
+  getWebStories,
+};

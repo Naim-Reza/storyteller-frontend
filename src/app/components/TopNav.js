@@ -31,12 +31,13 @@ export default function TopNav() {
     const response = await logout();
     if (!response.ok) return setIsLoading(false);
     setIsLoading(false);
+    history.push("/");
   };
 
   return (
     <>
       <Navbar dark color="primary" expand="md">
-        <NavbarBrand href="/">Story Teller</NavbarBrand>
+        <NavbarBrand href="/">StoryTeller</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav navbar>

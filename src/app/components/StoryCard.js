@@ -21,7 +21,7 @@ export default function StoryCard({ data }) {
   const [success, setSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
-  const { setNewPost } = useAuth();
+  const { setNewPost, user } = useAuth();
 
   const closeErrorAlert = () => setError(undefined);
   const closeSuccessAlert = () => {
@@ -66,25 +66,27 @@ export default function StoryCard({ data }) {
             {data.description}
           </CardText>
         </CardBody>
-        <CardFooter>
-          <Button
-            color="primary"
-            className="text-uppercase mr-2"
-            outline
-            onClick={() => history.push(`${urls.stroies}/${data.id}/edit`)}
-          >
-            Edit
-          </Button>
-          <Button
-            color="danger"
-            className="text-uppercase"
-            outline
-            onClick={handleDelete}
-            disabled={isLoading}
-          >
-            {isLoading ? <Spinner size="sm" /> : "delete"}
-          </Button>
-        </CardFooter>
+        {user && (
+          <CardFooter>
+            <Button
+              color="primary"
+              className="text-uppercase mr-2"
+              outline
+              onClick={() => history.push(`${urls.stroies}/${data.id}/edit`)}
+            >
+              Edit
+            </Button>
+            <Button
+              color="danger"
+              className="text-uppercase"
+              outline
+              onClick={handleDelete}
+              disabled={isLoading}
+            >
+              {isLoading ? <Spinner size="sm" /> : "delete"}
+            </Button>
+          </CardFooter>
+        )}
       </Card>
     </>
   );

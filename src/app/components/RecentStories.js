@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { Col } from "reactstrap";
-import { getUserStories, getWebStories } from "../api/stories";
+import { getRecentStories } from "../api/stories";
 import useAuth from "../hooks/useAuth";
 import Preloader from "./Preloader";
 import ServerErrorAlert from "./ServerErrorAlert";
 import StoryCard from "./StoryCard";
 
-export default function StoryList() {
+export default function RecentStories() {
   const [stories, setStories] = useState(undefined);
   const [error, setError] = useState(undefined);
   const [isLoading, setIsLoading] = useState(false);
-  const { newPost, user } = useAuth();
+  const { newPost } = useAuth();
 
   const closeErrorAlert = () => setError(undefined);
 
   const handleGetStories = async () => {
     setIsLoading(true);
-    const response = user ? await getUserStories() : await getWebStories();
+    const response = await getRecentStories();
     if (!response.ok) {
       setError(response.data);
       return setIsLoading(false);
@@ -46,7 +46,7 @@ export default function StoryList() {
       )}
       {stories &&
         stories.map((story) => (
-          <Col md={6} className="my-2" key={story.id}>
+          <Col md={4} className="my-2" key={story.id}>
             <StoryCard data={story} />
           </Col>
         ))}
