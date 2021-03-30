@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Button,
   Card,
@@ -15,6 +15,8 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import { useHistory } from "react-router";
 import urls from "../../config/urls";
+import useAuth from "../../hooks/useAuth";
+import ServerErrorAlert from "../ServerErrorAlert";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -25,16 +27,33 @@ const validationSchema = Yup.object().shape({
 });
 
 export default function LoginForm() {
+  const [error, setError] = useState(undefined);
+  const { login } = useAuth();
   const history = useHistory();
+
+  const handleLogin = async (values) => {
+    const response = await login(values);
+    if (!response.ok) return setError(response.data);
+    history.push(urls.dashboard);
+  };
+  const closeErrorAlert = () => setError(undefined);
+
   return (
     <div>
+      {error && (
+        <ServerErrorAlert
+          isOpen={error ? true : false}
+          toggle={closeErrorAlert}
+          errorMsg={error}
+        />
+      )}
       <Formik
         initialValues={{
           email: "",
           password: "",
         }}
         validationSchema={validationSchema}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={handleLogin}
       >
         {({
           touched,

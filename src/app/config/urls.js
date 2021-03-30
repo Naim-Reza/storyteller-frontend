@@ -4,7 +4,8 @@ const urls = {
   addnewstory: "/newstory",
   editStory: "/stories/:id",
   login: "/login",
-  register: "/resgister",
+  logout: "/logout",
+  register: "/signup",
 };
 
 export default urls;
